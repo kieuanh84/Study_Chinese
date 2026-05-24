@@ -339,49 +339,36 @@ function Sidebar({ activePage, onAuthChange, onNavigate, onOpenAuth, user }) {
         </div>
       </div>
 
-      {user ? (
-        <nav className="side-nav">
-          {pages.map((page) => (
-            <button
-              className={activePage === page.id ? 'is-active' : ''}
-              key={page.id}
-              onClick={() => onNavigate(page.id)}
-              type="button"
-            >
-              {page.label}
-            </button>
-          ))}
-        </nav>
-      ) : (
-        <nav className="side-nav">
-          {pages.map((page) => (
-            <button
-              className={activePage === page.id ? 'is-active' : ''}
-              key={page.id}
-              onClick={() => onNavigate(page.id)}
-              type="button"
-            >
-              {page.label}
-            </button>
-          ))}
-        </nav>
-      )}
+      <nav className="side-nav">
+        {pages.map((page) => (
+          <button
+            className={activePage === page.id ? 'is-active' : ''}
+            key={page.id}
+            onClick={() => onNavigate(page.id)}
+            type="button"
+          >
+            {page.label}
+          </button>
+        ))}
+      </nav>
 
-      {user ? (
-        <GoogleAuthPanel onAuthChange={onAuthChange} user={user} />
-      ) : (
-        <section className="auth-card">
-          <p>Đăng nhập để lưu tiến độ học và danh sách từ đã thuộc.</p>
-          <div className="auth-actions">
-            <button onClick={() => onOpenAuth('login')} type="button">
-              Đăng nhập
-            </button>
-            <button onClick={() => onOpenAuth('register')} type="button">
-              Đăng ký
-            </button>
-          </div>
-        </section>
-      )}
+      <div className="sidebar-auth">
+        {user ? (
+          <GoogleAuthPanel onAuthChange={onAuthChange} user={user} />
+        ) : (
+          <section className="auth-card">
+            <p>Đăng nhập để lưu tiến độ học và danh sách từ đã thuộc.</p>
+            <div className="auth-actions">
+              <button onClick={() => onOpenAuth('login')} type="button">
+                Đăng nhập
+              </button>
+              <button onClick={() => onOpenAuth('register')} type="button">
+                Đăng ký
+              </button>
+            </div>
+          </section>
+        )}
+      </div>
     </aside>
   )
 }
@@ -567,7 +554,7 @@ function GoogleAuthPanel({ mode = 'login', onAuthChange, onAuthenticated, user }
 
   function handleGoogleClick() {
     if (!clientId) {
-      setGoogleStatus('missing-client')
+      setGoogleStatus('unavailable')
       return
     }
 
@@ -602,13 +589,11 @@ function GoogleAuthPanel({ mode = 'login', onAuthChange, onAuthenticated, user }
   return (
     <section className="auth-card">
       <button className="google-direct" onClick={handleGoogleClick} type="button">
-        Tiếp tục với Google
+        {clientId ? 'Tiếp tục với Google' : 'Google chưa bật'}
       </button>
       {clientId && <div className="google-button" ref={googleButtonRef} />}
-      {googleStatus === 'missing-client' && (
-        <p className="auth-error">
-          Chưa cấu hình Google OAuth Client ID nên chưa thể mở Google.
-        </p>
+      {googleStatus === 'unavailable' && (
+        <p className="auth-note">Google OAuth chưa được bật trên môi trường này.</p>
       )}
       {googleStatus === 'failed' && (
         <p className="auth-error">Không thể đăng nhập Google lúc này.</p>
