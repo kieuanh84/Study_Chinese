@@ -7,10 +7,7 @@
 }
 
 .sky-effects {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .sky-effects::before {

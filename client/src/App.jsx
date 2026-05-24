@@ -108,6 +108,8 @@ function App() {
   )
   const suggestedLevel = getSuggestedLevel(testScore)
 
+  const canAccessLearningPages = Boolean(authUser)
+
   useEffect(() => {
     let isMounted = true
 
@@ -134,7 +136,19 @@ function App() {
     }
   }, [])
 
+  function handleAuthChange(nextUser) {
+    setAuthUser(nextUser)
+    if (!nextUser) {
+      setActivePage('home')
+    }
+  }
+
   function selectLevel(level) {
+    if (!authUser) {
+      setAuthMode('login')
+      return
+    }
+
     setActiveLevel(level)
     setActivePage('vocabulary')
     resetFlashcard()
@@ -196,7 +210,7 @@ function App() {
 
       <Sidebar
         activePage={activePage}
-        onAuthChange={setAuthUser}
+        onAuthChange={handleAuthChange}
         onOpenAuth={setAuthMode}
         onNavigate={setActivePage}
         user={authUser}
@@ -228,7 +242,8 @@ function App() {
           />
         )}
 
-        {(activePage === 'search' || activePage === 'vocabulary') && (
+        {canAccessLearningPages &&
+          (activePage === 'search' || activePage === 'vocabulary') && (
           <section className="study-area">
             <FiltersPanel
               activeLevel={activeLevel}
@@ -249,7 +264,7 @@ function App() {
           </section>
         )}
 
-        {activePage === 'flashcards' && (
+        {canAccessLearningPages && activePage === 'flashcards' && (
           <section className="study-area">
             <FiltersPanel
               activeLevel={activeLevel}
@@ -275,14 +290,14 @@ function App() {
           </section>
         )}
 
-        {activePage === 'grammar' && (
+        {canAccessLearningPages && activePage === 'grammar' && (
           <section className="study-area">
             <LevelFilter activeLevel={activeLevel} onLevelChange={changeLevel} />
             <GrammarView lessons={filteredGrammar} />
           </section>
         )}
 
-        {activePage === 'test' && (
+        {canAccessLearningPages && activePage === 'test' && (
           <section className="study-area">
             <PlacementTestView
               answers={testAnswers}
@@ -299,7 +314,7 @@ function App() {
           </section>
         )}
 
-        {activePage === 'writing' && (
+        {canAccessLearningPages && activePage === 'writing' && (
           <section className="study-area">
             <FiltersPanel
               activeLevel={activeLevel}
@@ -319,7 +334,7 @@ function App() {
       {authMode && (
         <AuthDialog
           mode={authMode}
-          onAuthChange={setAuthUser}
+          onAuthChange={handleAuthChange}
           onClose={() => setAuthMode(null)}
           onSwitchMode={setAuthMode}
         />
@@ -329,6 +344,8 @@ function App() {
 }
 
 function Sidebar({ activePage, onAuthChange, onNavigate, onOpenAuth, user }) {
+  const visiblePages = user ? pages : pages.filter((page) => page.id === 'home')
+
   return (
     <aside className="sidebar" aria-label="Điều hướng chính">
       <div className="brand-block">
@@ -340,7 +357,7 @@ function Sidebar({ activePage, onAuthChange, onNavigate, onOpenAuth, user }) {
       </div>
 
       <nav className="side-nav">
-        {pages.map((page) => (
+        {visiblePages.map((page) => (
           <button
             className={activePage === page.id ? 'is-active' : ''}
             key={page.id}
