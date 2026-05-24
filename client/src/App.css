@@ -309,12 +309,6 @@
   min-height: 42px;
 }
 
-.google-direct {
-  border-color: #dbe5f5;
-  background: #ffffff;
-  color: var(--text-strong);
-}
-
 .auth-warning {
   border-radius: 7px;
   background: var(--soft);
@@ -843,8 +837,44 @@ button.is-active,
 
 .flashcard {
   min-height: 478px;
-  padding: 26px;
+  padding: 0;
   text-align: center;
+}
+
+.flashcard-flipper {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.flashcard-inner {
+  position: relative;
+  min-height: 478px;
+  transition: transform 420ms ease;
+  transform-style: preserve-3d;
+}
+
+.flashcard-flipper.is-flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  backface-visibility: hidden;
+  padding: 26px;
+}
+
+.flashcard-front {
+  justify-content: flex-start;
+}
+
+.flashcard-back {
+  justify-content: center;
+  transform: rotateY(180deg);
 }
 
 .flashcard-meta {
@@ -858,7 +888,7 @@ button.is-active,
   font-size: clamp(96px, 16vw, 172px);
 }
 
-.flashcard > p {
+.flashcard-front > p {
   margin: 0;
   color: var(--accent);
   font-size: 24px;

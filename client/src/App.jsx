@@ -571,16 +571,6 @@ function GoogleAuthPanel({ mode = 'login', onAuthChange, onAuthenticated, user }
     }
   }, [clientId, mode, onAuthChange, onAuthenticated, user])
 
-  function handleGoogleClick() {
-    if (!clientId) {
-      setGoogleStatus('unavailable')
-      return
-    }
-
-    setGoogleStatus('idle')
-    window.google?.accounts?.id?.prompt()
-  }
-
   function signOut() {
     localStorage.removeItem('hskUser')
     localStorage.removeItem('hskToken')
@@ -607,10 +597,10 @@ function GoogleAuthPanel({ mode = 'login', onAuthChange, onAuthenticated, user }
 
   return (
     <section className="auth-card">
-      <button className="google-direct" onClick={handleGoogleClick} type="button">
-        {clientId ? 'Tiếp tục với Google' : 'Google chưa bật'}
-      </button>
       {clientId && <div className="google-button" ref={googleButtonRef} />}
+      {!clientId && (
+        <p className="auth-note">Google OAuth chưa được bật trên môi trường này.</p>
+      )}
       {googleStatus === 'unavailable' && (
         <p className="auth-note">Google OAuth chưa được bật trên môi trường này.</p>
       )}
@@ -854,31 +844,43 @@ function FlashcardView({
 }) {
   return (
     <div className="flashcard-view">
-      <div className="flashcard">
-        <div className="flashcard-meta">
-          <span>HSK {card.level}</span>
-          <span>
-            {currentIndex + 1}/{totalCards}
-          </span>
-        </div>
-        <div className="flash-hanzi">{card.hanzi}</div>
-        <p>{card.pinyin}</p>
-        {showAnswer && (
-          <div className="flash-answer">
-            <strong>{card.meaningVi}</strong>
-            <span>{card.pos}</span>
-            <span>{card.hanViet}</span>
-            {card.exampleZh && <p>{card.exampleZh}</p>}
-            {card.exampleVi && <small>{card.exampleVi}</small>}
+      <button
+        aria-label={showAnswer ? 'Ẩn nghĩa của card' : 'Lật card để xem nghĩa'}
+        aria-pressed={showAnswer}
+        className={`flashcard flashcard-flipper ${showAnswer ? 'is-flipped' : ''}`}
+        onClick={() => setShowAnswer((current) => !current)}
+        type="button"
+      >
+        <div className="flashcard-inner">
+          <div className="flashcard-face flashcard-front">
+            <div className="flashcard-meta">
+              <span>HSK {card.level}</span>
+              <span>
+                {currentIndex + 1}/{totalCards}
+              </span>
+            </div>
+            <div className="flash-hanzi">{card.hanzi}</div>
+            <p>{card.pinyin}</p>
           </div>
-        )}
-      </div>
+          <div className="flashcard-face flashcard-back">
+            <div className="flashcard-meta">
+              <span>HSK {card.level}</span>
+              <span>{card.hanzi}</span>
+            </div>
+            <div className="flash-answer">
+              <strong>{card.meaningVi}</strong>
+              <span>Từ loại: {card.pos}</span>
+              <span>Hán Việt: {card.hanViet}</span>
+              {card.meaningZh && <p>{card.meaningZh}</p>}
+              {card.exampleZh && <p>{card.exampleZh}</p>}
+              {card.exampleVi && <small>{card.exampleVi}</small>}
+            </div>
+          </div>
+        </div>
+      </button>
       <div className="flash-actions">
         <button onClick={onPrevious} type="button">
           Trước
-        </button>
-        <button onClick={() => setShowAnswer((current) => !current)} type="button">
-          {showAnswer ? 'Ẩn nghĩa' : 'Lật card'}
         </button>
         <button onClick={onNext} type="button">
           Tiếp
