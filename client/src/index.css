@@ -1,34 +1,34 @@
 :root {
-  --accent: #ec7ab7;
-  --accent-2: #7cb7ff;
-  --bg: #f9f2ff;
-  --border: #e8d8f4;
-  --border-strong: #b7ccf2;
-  --button: #fff7fd;
-  --code: #eef6ff;
-  --danger: #e95d8d;
-  --guide: rgb(124 183 255 / 26%);
-  --ink: #24304f;
+  --accent: #d989b8;
+  --accent-2: #8fbbe8;
+  --bg: #f7f6fb;
+  --border: #e5deee;
+  --border-strong: #c9d6ea;
+  --button: #fbf8fc;
+  --code: #f1f6fb;
+  --danger: #d96f98;
+  --guide: rgb(143 187 232 / 20%);
+  --ink: #2b3350;
   --input: #ffffff;
-  --muted: #6f6f8e;
-  --paper: #f8fbff;
-  --soft: #f2eaff;
+  --muted: #74728a;
+  --paper: #fbfcff;
+  --soft: #f2eef8;
   --success: #48a77c;
-  --surface: rgb(255 255 255 / 86%);
-  --text: #4f4b68;
-  --text-strong: #25223e;
-  --shadow: 0 18px 42px rgb(86 80 132 / 12%);
+  --surface: rgb(255 255 255 / 90%);
+  --text: #535069;
+  --text-strong: #27243d;
+  --shadow: 0 16px 36px rgb(90 84 128 / 9%);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 12% 18%, rgb(255 188 221 / 38%) 0 12%, transparent 28%),
-    radial-gradient(circle at 82% 8%, rgb(172 214 255 / 42%) 0 14%, transparent 30%),
-    linear-gradient(90deg, rgb(124 183 255 / 8%) 1px, transparent 1px),
-    linear-gradient(rgb(236 122 183 / 7%) 1px, transparent 1px),
+    radial-gradient(circle at 14% 18%, rgb(243 199 224 / 18%) 0 10%, transparent 28%),
+    radial-gradient(circle at 84% 10%, rgb(196 219 244 / 22%) 0 12%, transparent 30%),
+    linear-gradient(90deg, rgb(143 187 232 / 4%) 1px, transparent 1px),
+    linear-gradient(rgb(217 137 184 / 4%) 1px, transparent 1px),
     var(--bg);
-  background-size: 36px 36px;
+  background-size: 42px 42px;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -71,6 +71,6 @@ canvas {
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid rgb(124 183 255 / 32%);
+  outline: 3px solid rgb(143 187 232 / 24%);
   outline-offset: 2px;
 }

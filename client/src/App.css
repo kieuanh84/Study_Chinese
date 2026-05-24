@@ -17,9 +17,9 @@
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle, rgb(255 255 255 / 88%) 0 1px, transparent 1.8px),
-    radial-gradient(circle, rgb(124 183 255 / 70%) 0 1px, transparent 2px),
-    radial-gradient(circle, rgb(236 122 183 / 60%) 0 1px, transparent 2px);
+    radial-gradient(circle, rgb(255 255 255 / 55%) 0 1px, transparent 1.8px),
+    radial-gradient(circle, rgb(143 187 232 / 38%) 0 1px, transparent 2px),
+    radial-gradient(circle, rgb(217 137 184 / 30%) 0 1px, transparent 2px);
   background-position:
     18px 24px,
     88px 70px,
@@ -29,7 +29,7 @@
     190px 190px,
     240px 240px;
   content: '';
-  opacity: 0.7;
+  opacity: 0.36;
 }
 
 .sky-effects span {
@@ -38,8 +38,8 @@
   width: 150px;
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 92%), rgb(124 183 255 / 70%));
-  filter: drop-shadow(0 0 8px rgb(124 183 255 / 75%));
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 66%), rgb(143 187 232 / 44%));
+  filter: drop-shadow(0 0 6px rgb(143 187 232 / 34%));
   opacity: 0;
   transform: rotate(-18deg);
   animation: shooting-star 8s linear infinite;
@@ -75,7 +75,7 @@
   }
 
   8% {
-    opacity: 0.95;
+    opacity: 0.42;
   }
 
   24% {
@@ -182,8 +182,8 @@
   z-index: 20;
   display: grid;
   place-items: center;
-  background: rgb(31 34 65 / 34%);
-  backdrop-filter: blur(6px);
+  background: rgb(39 36 61 / 22%);
+  backdrop-filter: blur(5px);
   padding: 18px;
 }
 
@@ -192,7 +192,7 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--surface);
-  box-shadow: 0 24px 70px rgb(22 18 15 / 22%);
+  box-shadow: 0 24px 70px rgb(66 58 98 / 16%);
   padding: 20px;
 }
 
@@ -218,8 +218,8 @@
 .auth-error {
   margin: 0;
   border-radius: 7px;
-  background: rgb(236 122 183 / 13%);
-  color: #b83268;
+  background: rgb(217 137 184 / 12%);
+  color: #9f4e78;
   font-size: 13px;
   line-height: 1.45;
   padding: 9px 10px;
@@ -228,7 +228,7 @@
 .auth-note {
   margin: 0;
   border-radius: 7px;
-  background: rgb(124 183 255 / 12%);
+  background: rgb(143 187 232 / 12%);
   color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
@@ -630,7 +630,7 @@ select {
 input:focus,
 select:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgb(124 183 255 / 22%);
+  box-shadow: 0 0 0 3px rgb(143 187 232 / 18%);
 }
 
 .segmented {
