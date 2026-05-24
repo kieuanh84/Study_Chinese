@@ -88,15 +88,14 @@
 
 .sidebar {
   position: sticky;
-  top: 12px;
+  top: 0;
   z-index: 1;
-  align-self: start;
   display: flex;
-  max-height: calc(100vh - 24px);
+  height: 100vh;
   flex-direction: column;
   gap: 12px;
   border-right: 1px solid var(--border);
-  border-radius: 0 8px 8px 0;
+  border-radius: 0;
   background: rgb(255 255 255 / 72%);
   padding: 14px;
   backdrop-filter: blur(18px);
@@ -347,9 +346,10 @@
 
 .side-nav {
   display: grid;
+  align-content: start;
   gap: 7px;
+  flex: 1 1 auto;
   min-height: 0;
-  max-height: calc(100vh - 310px);
   overflow-y: auto;
   padding-right: 2px;
   scrollbar-width: thin;
@@ -370,7 +370,7 @@
 
 .sidebar-auth {
   flex-shrink: 0;
-  margin-top: 0;
+  margin-top: auto;
 }
 
 .sidebar-auth .auth-card {
