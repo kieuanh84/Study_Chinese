@@ -73,6 +73,6 @@ canvas {
 button:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid rgb(143 187 232 / 24%);
+  outline: 3px solid rgb(181 107 127 / 24%);
   outline-offset: 2px;
 }
