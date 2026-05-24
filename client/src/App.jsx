@@ -217,21 +217,19 @@ function App() {
       />
 
       <main className="app-shell">
-        {activePage !== 'home' && (
-          <header className="topbar">
-            <div>
-              <p className="eyebrow">中文学习</p>
-              <h1>Học tiếng Trung theo HSK</h1>
-            </div>
-            <div className="topbar-stats" aria-label="Thống kê học tập">
-              <span>{vocabularyData.length} từ vựng</span>
-              <span>{grammarLessons.length} điểm ngữ pháp</span>
-              <span>{knownCount} từ đã thuộc</span>
-              {vocabularyStatus === 'loading' && <span>Đang tải dữ liệu</span>}
-              {vocabularyStatus === 'fallback' && <span>Dùng dữ liệu mẫu</span>}
-            </div>
-          </header>
-        )}
+        <header className="topbar">
+          <div>
+            <p className="eyebrow">中文学习</p>
+            <h1>Học tiếng Trung theo HSK</h1>
+          </div>
+          <div className="topbar-stats" aria-label="Thống kê học tập">
+            <span>{vocabularyData.length} từ vựng</span>
+            <span>{grammarLessons.length} điểm ngữ pháp</span>
+            <span>{knownCount} từ đã thuộc</span>
+            {vocabularyStatus === 'loading' && <span>Đang tải dữ liệu</span>}
+            {vocabularyStatus === 'fallback' && <span>Dùng dữ liệu mẫu</span>}
+          </div>
+        </header>
 
         {activePage === 'home' && (
           <HomeView
