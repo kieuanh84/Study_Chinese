@@ -58,6 +58,8 @@ function App() {
   const [vocabularyStatus, setVocabularyStatus] = useState('loading')
   const [authUser, setAuthUser] = useState(() => getStoredUser())
   const [authMode, setAuthMode] = useState(null)
+  const activePageLabel =
+    pages.find((page) => page.id === activePage)?.label || 'Trang chủ'
 
   const topics = useMemo(
     () => ['all', ...new Set(vocabularyData.map((word) => word.topic))],
@@ -219,7 +221,9 @@ function App() {
       <main className="app-shell">
         <header className="topbar">
           <div>
-            <p className="eyebrow">中文学习</p>
+            <p className="eyebrow">
+              中文学习 <span aria-hidden="true">•</span> {activePageLabel}
+            </p>
             <h1>Học tiếng Trung theo HSK</h1>
           </div>
           <div className="topbar-stats" aria-label="Thống kê học tập">
